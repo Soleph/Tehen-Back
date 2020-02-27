@@ -4,7 +4,9 @@ import { Post } from '../schemas/Post'
 
 class PostController {
   public async index (req: Request, res: Response): Promise<Response> {
-    const posts = await Post.find()
+    const { page = 1 } = req.query
+
+    const posts = await Post.paginate({}, { page, limit: 8 })
 
     return res.json(posts)
   }

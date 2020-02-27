@@ -1,5 +1,7 @@
-import { Schema, Model, model } from 'mongoose'
+import { Schema, model, PaginateModel } from 'mongoose'
 import { PostInterface } from '../interfaces/Post'
+
+import mongoosePaginate from 'mongoose-paginate-v2'
 
 const PostSchema = new Schema({
   title: {
@@ -18,4 +20,6 @@ const PostSchema = new Schema({
   timestamps: true
 })
 
-export const Post: Model<PostInterface> = model<PostInterface>('Post', PostSchema)
+PostSchema.plugin(mongoosePaginate)
+
+export const Post: PaginateModel<PostInterface> = model<PostInterface>('Post', PostSchema)
