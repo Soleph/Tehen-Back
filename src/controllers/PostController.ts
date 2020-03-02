@@ -6,7 +6,14 @@ class PostController {
   public async index (req: Request, res: Response): Promise<Response> {
     const { page = 1 } = req.query
 
-    const posts = await Post.paginate({}, { page, limit: 8 })
+    const options = {
+      sort: { createdAt: -1 },
+      page,
+      limit: 10,
+      lean: true
+    }
+
+    const posts = await Post.paginate({}, options)
 
     return res.json(posts)
   }
