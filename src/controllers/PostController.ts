@@ -9,7 +9,7 @@ class PostController {
     const options = {
       sort: { createdAt: -1 },
       page,
-      limit: 10,
+      limit: 8,
       lean: true
     }
 
