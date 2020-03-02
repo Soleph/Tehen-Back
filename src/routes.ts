@@ -16,7 +16,7 @@ routes.post('/users', validateToken, validateUserStore, UserController.store)
 routes.post('/sessions', validateSessionStore, SessionController.store)
 
 routes.get('/posts', PostController.index)
-routes.post('/posts', validateToken, validatePost, PostController.store)
+routes.post('/posts', validatePost, PostController.store)
 routes.get('/posts/:id', PostController.show)
 routes.put('/posts/:id', validateToken, validatePost, PostController.update)
 routes.delete('/posts/:id', validateToken, PostController.delete)
