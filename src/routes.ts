@@ -13,7 +13,9 @@ import validatePost from './validators/Post'
 const routes = Router()
 
 routes.post('/users', validateToken, validateUserStore, UserController.store)
+
 routes.post('/sessions', validateSessionStore, SessionController.store)
+routes.get('/sessions', validateToken, SessionController.index)
 
 routes.get('/posts', PostController.index)
 routes.post('/posts', validateToken, validatePost, PostController.store)

@@ -1,13 +1,19 @@
 import jwt from 'jsonwebtoken'
 import authConfig from '../config/auth'
 import { Request, Response } from 'express'
+import { User } from '../schemas/User'
 
 export default async (req: Request, res: Response, next: Function): Promise<Response> => {
+  const [, token] = req.headers.authorization.split(' ')
   try {
-    const token = req.headers.authorization.split(' ')[1]
-    const decode = jwt.verify(token, authConfig.secret)
+    const payload = await jwt.verify(token, authConfig.secret)
+    const user = await User.findById(payload)
 
-    req.body.token = decode
+    if (!user) {
+      return res.send(401)
+    }
+
+    req.body.auth = user
 
     next()
   } catch (error) {

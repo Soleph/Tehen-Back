@@ -31,6 +31,10 @@ class SessionController {
       })
     })
   }
+
+  public async index (req: Request, res: Response): Promise<void> {
+    res.send(req.body.auth)
+  }
 }
 
 export default new SessionController()
